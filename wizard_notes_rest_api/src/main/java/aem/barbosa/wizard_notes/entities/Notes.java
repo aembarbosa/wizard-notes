@@ -1,5 +1,6 @@
 package aem.barbosa.wizard_notes.entities;
 
+
 import java.io.Serializable;
 import java.util.Objects;
 
