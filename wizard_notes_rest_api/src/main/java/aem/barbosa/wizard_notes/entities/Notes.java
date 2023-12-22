@@ -1,24 +1,36 @@
 package aem.barbosa.wizard_notes.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "notes")
 public class Notes implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String message;
-    private int user_id;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
     public Notes(){
     }
 
-    public Notes(Long id, String title, String message, int user_id) {
+    public Notes(Long id, String title, String message, User user) {
         this.id = id;
         this.title = title;
         this.message = message;
-        this.user_id = user_id;
+        this.user = user;
     }
 
     public Long getId() {
@@ -45,12 +57,12 @@ public class Notes implements Serializable {
         this.message = message;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

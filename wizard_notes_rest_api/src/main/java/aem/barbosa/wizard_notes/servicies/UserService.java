@@ -22,4 +22,27 @@ public class UserService {
         Optional<User> obj = repository.findById(id);
         return obj.get();
     }
+
+    // Inserir no banco de dados um usuario
+    public User insert(User user) {
+       return repository.save(user);
+    }
+
+    public User update(Long id, User user) {
+        User entity = repository.getReferenceById(id);
+        updateData(entity, user);
+        return repository.save(entity);
+    }
+
+    private void updateData(User entity, User user) {
+        entity.setUsername(entity.getUsername());
+        entity.setFull_name(user.getFull_name());
+        entity.setPassword(user.getPassword());
+    }
+
+    // Deletar um usuário do banco de dados
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
 }
