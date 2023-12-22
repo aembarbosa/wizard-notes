@@ -19,7 +19,7 @@ public class User implements Serializable {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private List<Notes> listNotes = new ArrayList<>();
+    private List<Note> listNotes = new ArrayList<>();
 
     public User() {
     }
@@ -63,7 +63,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public List<Notes> getNotes() {
+    public List<Note> getNotes() {
         return listNotes;
     }
 

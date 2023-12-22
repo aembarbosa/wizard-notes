@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "notes")
-public class Notes implements Serializable {
+public class Note implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class Notes implements Serializable {
     private User user;
 
 
-    public Notes(){
+    public Note(){
     }
 
-    public Notes(Long id, String title, String message, User user) {
+    public Note(Long id, String title, String message, User user) {
         this.id = id;
         this.title = title;
         this.message = message;
@@ -68,7 +68,7 @@ public class Notes implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Notes notes)) return false;
+        if (!(o instanceof Note notes)) return false;
         return getId() == notes.getId();
     }
 
