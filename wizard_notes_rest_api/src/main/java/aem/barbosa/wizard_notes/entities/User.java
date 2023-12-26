@@ -1,5 +1,9 @@
 package aem.barbosa.wizard_notes.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,6 +13,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User implements Serializable {
 
     @Id
@@ -18,7 +23,7 @@ public class User implements Serializable {
     private String full_name;
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Note> listNotes = new ArrayList<>();
 
     public User() {

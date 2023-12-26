@@ -23,7 +23,7 @@ public class TestConfig implements CommandLineRunner {
         User samir = new User(null, "samirtf", "Samir TF", "87654321");
 
         try {
-            userRepository.saveAll(Arrays.asList(alyne, samir));
+            //userRepository.saveAll(Arrays.asList(alyne, samir));
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }

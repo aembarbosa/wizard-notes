@@ -20,7 +20,7 @@ public class NoteService {
 
     public Note findById(Long id) {
         Optional<Note> note = repository.findById(id);
-        return note.get();
+        return note.orElse(null);
     }
 
     public Note insert(Note note) {

@@ -1,7 +1,7 @@
 package aem.barbosa.wizard_notes.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,6 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "notes")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Note implements Serializable {
 
     @Id
@@ -17,7 +18,6 @@ public class Note implements Serializable {
     private String title;
     private String message;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

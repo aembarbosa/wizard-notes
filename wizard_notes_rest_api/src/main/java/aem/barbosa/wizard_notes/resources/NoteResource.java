@@ -19,22 +19,17 @@ public class NoteResource {
 
     @GetMapping
     public ResponseEntity<List<Note>> findAll() {
-//        Notes u = new Notes(1L, "Maria", "Maria dos Santos", "123456");
-        List<Note> users = service.findAll();
-        return ResponseEntity.ok().body(users);
+        List<Note> notes = service.findAll();
+        return ResponseEntity.ok().body(notes);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Note> findById(@PathVariable Long id) {
-        Note obj = service.findById(id);
-        return ResponseEntity.ok().body(obj);
-    }
-
-    @PostMapping
-    public ResponseEntity<Note> insert(@RequestBody Note note) {
-        note = service.insert(note);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(note.getId()).toUri();
-        return ResponseEntity.created(uri).body(note);
+        Note existingNote = service.findById(id);
+        if (existingNote == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(existingNote);
     }
 
     @PutMapping(value = "/{id}")

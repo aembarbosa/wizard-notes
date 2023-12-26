@@ -2,6 +2,7 @@ package aem.barbosa.wizard_notes.servicies;
 
 import aem.barbosa.wizard_notes.entities.User;
 import aem.barbosa.wizard_notes.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElse(null);
     }
 
     // Inserir no banco de dados um usuario
@@ -28,6 +29,7 @@ public class UserService {
        return repository.save(user);
     }
 
+    @Transactional
     public User update(Long id, User user) {
         User entity = repository.getReferenceById(id);
         updateData(entity, user);
